@@ -7,12 +7,15 @@ import matplotlib.pyplot as plt
 
 
 # Parametry, które trzeba ręcznie wybrać
-r = 2.3  # parametr kontolny
-x0 = 0.4  # punkt początkowy
+r = 3  # parametr kontolny
+x0 = 0.61  # punkt początkowy
 rzad = 1  # rząd złożenia
 
 
-def y(xx): return r * xx * (1 - xx)
+#  Odkomentuj odwzorowanie, które cię interesuje
+# def y(xx): return r * xx * (1 - xx)  # Odwzorowanie logistyczne
+# def y(xx): return 1 - 2 * np.abs(xx - 1 / 2)  # TentMap
+# def y(xx): return 2 * xx % 1  # ModMap
 
 
 def zl(iks):
@@ -33,6 +36,7 @@ fig, ax = plt.subplots(1)
 def ploty():
     global x0
     global text
+    global text_x0
     x0 = x00
     ax.plot(x, zl(x))
 
@@ -42,6 +46,7 @@ def ploty():
     ax.plot([x0, x0], [0, zl(x0)], color='green')
 
     text = ax.text(1, 1, f'n = {n}')
+    text_x0 = ax.text(1, 0.5, f'xn = {x0}')
 
 
 ploty()
@@ -54,6 +59,7 @@ def update(event):
 
         n += 1
         text.set_text(f'n = {n}')
+        text_x0.set_text(f'xn = {x0}')
 
         ax.plot([x0, zl(x0)], [zl(x0), zl(x0)], color='green')  # kreska pozioma
         ax.plot([zl(x0), zl(x0)], [zl(x0), zl(zl(x0))], color='green')  # kreska pionowa
